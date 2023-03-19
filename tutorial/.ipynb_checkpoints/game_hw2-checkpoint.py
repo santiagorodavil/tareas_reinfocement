@@ -1,8 +1,6 @@
 import numpy as np
 class Game_hw2:
-    snakes = [(73,1), (46,5), (55,7), (48,9), (52,11), (59,17), (83,19), (44,22), (95,24), (98,28), (69,33), (64,36),(92,51)]
-    stairs = [(8,26), (21,82), (43,77), (50,91), (54,93), (62,96), (66,87), (80,100)]
-    def __init__(self, goals, fails, snakes = snakes, stairs = stairs):
+    def __init__(self, goals, fails, snakes, stairs):
         self.goals = goals
         self.fails = fails
         self.snakes = snakes

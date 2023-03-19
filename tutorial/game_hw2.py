@@ -1,25 +1,21 @@
 import numpy as np
 class Game_hw2:
-    snakes = [(73,1), (46,5), (55,7), (48,9), (52,11), (59,17), (83,19), (44,22), (95,24), (98,28), (69,33), (64,36),(92,51)]
-    stairs = [(8,26), (21,82), (43,77), (50,91), (54,93), (62,96), (66,87), (80,100)]
-    def __init__(self, goals, fails, snakes = snakes, stairs = stairs):
+    def __init__(self, goals, fails, live_reward=0.0):
         self.goals = goals
         self.fails = fails
-        self.snakes = snakes
-        self.stairs = stairs
+        self.snakes = [(73,1), (46,5), (55,7), (48,9), (52,11), (59,17), (83,19), (44,22), (95,24), (98,28), (69,33), (64,36),(92,51)]
+        self.stairs =  [(8,26), (21,82), (43,77), (50,91), (54,93), (62,96), (66,87), (80,100)]
+        self.live_reward = live_reward
+
         self.states = []
-        
+        self.allowed_actions = {}
         
         self.probabilities = {}
         
         #Crear el tablero
-        value = 0
-        for n in range(10):
-            row = []
-            for i in range(10):
-                value+=1        
-                row.append(value)
-            self.states.append(row)
+        for n in range(100):
+             self.states.append(n+1)
+
             
             
         # Diccionario de probabilidades adelante/atrás

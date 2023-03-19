@@ -27,8 +27,8 @@ class Game_hw2:
         # Como se lanza 1 dado, la probabilidad siempre es de 1/6 para cualquiera de los resultados.   
         p_caida = 1/6
         reward = 0
-        goal_rew = 100
-        fail_rew = -100
+        self.goal_rew = 1
+        self.fail_rew = -1
         for row in self.states:
             for index in row:  
                 mov_prob = {'Ad':[],'At':[]}
@@ -60,12 +60,12 @@ class Game_hw2:
                             cas_lleg_at = max(stair)
 
                     # Asigna recompensa a la respectiva casilla de llegada (normal, goal o fail)
-                    if cas_lleg_ad in goals: current_rew_ad = goal_rew
-                    elif cas_lleg_ad in fails: current_rew_ad = fail_rew
+                    if cas_lleg_ad in goals: current_rew_ad = self.goal_rew
+                    elif cas_lleg_ad in fails: current_rew_ad = self.fail_rew
                     else: current_rew_ad = reward
 
-                    if cas_lleg_at in goals: current_rew_at = goal_rew
-                    elif cas_lleg_at in fails: current_rew_at = fail_rew
+                    if cas_lleg_at in goals: current_rew_at = self.goal_rew
+                    elif cas_lleg_at in fails: current_rew_at = self.fail_rew
                     else: current_rew_at = reward
 
                     # Se le asigna a 
@@ -74,17 +74,26 @@ class Game_hw2:
                 self.probabilities[index] = mov_prob
             
         self.state_values = self.init_values()
+        self.policy = self.init_policy()
     
     def init_values(self):
         state_values = {}
         for n in range(100):
             state_values[n+1] = 0
         return state_values
+    
+    def init_policy(self):
+        policy = {}
+        for n in range(100):
+            policy[n+1] = 'Ad'
+        return policy
+        
                 
-    def step(self, state, action, random=False):
+    def step(self, state, action, random=False, dice=0):
         posible_actions = self.probabilities[state]
         # valor de arrojar el dado
-        dice = np.random.randint(1, 7)
+        if dice == 0:
+            dice = np.random.randint(1, 7)
         
         # si la politica es aleatoria, se le asigna una accion aleatoria
         if random:
@@ -103,7 +112,7 @@ class Game_hw2:
             next_state = posible_actions[real_action][dice-1]
         
         # Evalua si next_state es un estado terminal
-        if (next_state in self.goals) or (next_state in self.fails):
+        if (next_state[1] in self.goals) or (next_state[1] in self.fails):
             done = True
         else:
             done  = False

@@ -24,7 +24,7 @@ class Game_hw2:
         # Estructura-> casilla actual: probabilidad, casilla de llegada (segun el valor del dado), Recompensa.
         # Como se lanza 1 dado, la probabilidad siempre es de 1/6 para cualquiera de los resultados.   
         p_caida = 1/6
-        reward = 0
+        reward = -0.1
         self.goal_rew = 1
         self.fail_rew = -1
         for row in self.states:

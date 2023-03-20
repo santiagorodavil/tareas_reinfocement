@@ -31,7 +31,7 @@ class EscalerasSerpientes:
 
         # Acción real (aleatoria) del agente dada una acción determinística
         self.real_actions = {'Ad': [1,2,3,4,5,6],
-                             'At': [-1,-2,-3.-4,-5,-6]}
+                             'At': [-1,-2,-3,-4,-5,-6]}
 
         # Probabilidades de las acciones reales
         self.action_probabilities = [1/6,1/6,1/6,1/6,1/6,1/6]
@@ -121,7 +121,6 @@ class EscalerasSerpientes:
                 break
     def solve_value_iteration(self, gamma=1.0, horizon=10, init_state=1):
         for i in range(horizon):
-            inp=input(f"Presione ENTER para la siguiente iteracion. Iteracón:{i}")
             try:
                 self.value_iteration(gamma)
             except Exception as e:

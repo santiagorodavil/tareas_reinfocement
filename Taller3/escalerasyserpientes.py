@@ -46,7 +46,7 @@ class EscalerasSerpientes:
     def init_q_values(self):
         q_values = {}
         for state in self.states:
-            for action in self.allowed_actions[state]
+            for action in self.allowed_actions[state]:
                 q_values[(state,action)] = 0.0
         return q_values
     

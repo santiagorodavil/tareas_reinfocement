@@ -123,4 +123,10 @@ class EscalerasSerpientes:
 
     def max_val(self, d):
         return max(d.items(), key=operator.itemgetter(1))[1]
+    
+    def key_min(self, d):
+        return min(d.items(), key=operator.itemgetter(1))
+
+    def min_val(self, d):
+        return min(d.items(), key=operator.itemgetter(1))[1]
 

@@ -26,12 +26,18 @@ class EscalerasSerpientes:
         # Inicializa el valor de cada estado
         self.state_values = self.init_values()
         
+<<<<<<< HEAD
         # Q(s,a)
         self.Q=self.init_Q(0,0)
         
         # C(s,a)
         self.C=self.init_Q(0,0)
         
+=======
+        #Inicializa el valor de la funcion q
+        self.q_values = self.init_q_values()
+
+>>>>>>> sra
         # Inicializa la política
         self.policy = dict.fromkeys(self.states, 'Ad')
 
@@ -45,12 +51,25 @@ class EscalerasSerpientes:
         # Suma cumulativa de probabilidades
         self.action_probs_cum = np.cumsum(self.action_probabilities)
 
+<<<<<<< HEAD
     # Método de inicialización de estados
+=======
+    # Metodo de inicialización de valores funcion Q
+    def init_q_values(self):
+        q_values = {}
+        for state in self.states:
+            for action in self.allowed_actions[state]:
+                q_values[(state,action)] = 0.0
+        return q_values
+    
+    # Método de inicialización de valores
+>>>>>>> sra
     def init_values(self):
         state_values = {}
         for state in self.states:
             state_values[state] = 0.0
         return state_values
+<<<<<<< HEAD
     
     # Método de inicialización de par estado accion
     def init_Q(self,Ad,At):
@@ -58,6 +77,8 @@ class EscalerasSerpientes:
         for state in self.states:
             Q[state] = {'Ad': Ad,'At': At}
         return Q
+=======
+>>>>>>> sra
 
     # Método para obtener las acciones permitidas en un estado
     def get_allowed_actions(self, state):
@@ -66,9 +87,15 @@ class EscalerasSerpientes:
     # Método para dar pasos
     def step(self, state, action, random=False):
         if(state in self.goals):
+<<<<<<< HEAD
             return "Azul", +1.0, None,None, True
         elif(state in self.fails):
             return "Rojo", -1.0,None, None, True
+=======
+            return "Azul", +1.0, None, True
+        elif(state in self.fails):
+            return "Rojo", -1.0, None, True
+>>>>>>> sra
         else:
             if random:
                 assert action in self.get_allowed_actions(state)
@@ -115,7 +142,11 @@ class EscalerasSerpientes:
                 reward = self.live_reward
                 done = False
 
+<<<<<<< HEAD
             return state_, reward, action, real_action, done
+=======
+            return state_, reward, real_action, done
+>>>>>>> sra
     
     # Métodos auxiliares
     def key_max(self, d):
@@ -123,6 +154,7 @@ class EscalerasSerpientes:
 
     def max_val(self, d):
         return max(d.items(), key=operator.itemgetter(1))[1]
+<<<<<<< HEAD
     
     def key_min(self, d):
         return min(d.items(), key=operator.itemgetter(1))
@@ -130,3 +162,21 @@ class EscalerasSerpientes:
     def min_val(self, d):
         return min(d.items(), key=operator.itemgetter(1))[1]
 
+=======
+
+    def solve_dynamic_programming(self, gamma=1.0, horizon=10, init_state=1):
+        for i in range(horizon):
+            try:
+                self.update_values(gamma)
+                
+            except Exception as e:
+                print(e)
+                break
+    def solve_value_iteration(self, gamma=1.0, horizon=10, init_state=1):
+        for i in range(horizon):
+            try:
+                self.value_iteration(gamma)
+            except Exception as e:
+                print(e)
+                break
+>>>>>>> sra

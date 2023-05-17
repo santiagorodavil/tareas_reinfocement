@@ -25,6 +25,9 @@ class EscalerasSerpientes:
         
         # Inicializa el valor de cada estado
         self.state_values = self.init_values()
+        
+        #Inicializa el valor de la funcion q
+        self.q_values = self.init_q_values()
 
         # Inicializa la política
         self.policy = dict.fromkeys(self.states, 'Ad')
@@ -39,6 +42,14 @@ class EscalerasSerpientes:
         # Suma cumulativa de probabilidades
         self.action_probs_cum = np.cumsum(self.action_probabilities)
 
+    # Metodo de inicialización de valores funcion Q
+    def init_q_values(self):
+        q_values = {}
+        for state in self.states:
+            for action in self.allowed_actions[state]
+                q_values[(state,action)] = 0.0
+        return q_values
+    
     # Método de inicialización de valores
     def init_values(self):
         state_values = {}
